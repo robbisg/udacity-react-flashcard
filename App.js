@@ -1,23 +1,55 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
+import { TabNavigator } from 'react-navigation'
+import { DeckNavigator, AddDeck } from './components/Home'
+import { Constants } from 'expo'
+import { initDecks, decks } from './utils/api'
+import { setLocalNotification } from './utils/notifications'
+
+const Tabs = TabNavigator({
+  DeckList: {
+    screen: DeckNavigator,
+  },
+  Add: {
+    screen: AddDeck,
+  }},{
+    tabBarPosition:'top'
+  }
+)
+
+
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <View style={{flex:1}}>
+        <View style={{ backgroundColor: "#000", height: Constants.statusBarHeight }}>
+          <StatusBar
+            backgroundColor="black"
+            barStyle="light-content"
+          />
+
+        </View>
+        <View style={styles.container}>
+          <Tabs />
+        </View>
+    </View>
     );
   }
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    //paddingTop:10,
+    //alignItems: 'center',
     justifyContent: 'center',
   },
 });
