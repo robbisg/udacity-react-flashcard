@@ -54,7 +54,7 @@ export class DeckItem extends Component {
   render(){
     const { deck } = this.props
     return (
-      <KeyboardAvoidingView style={{flex: 2}} keyboardVerticalOffset={365} behavior='height'>
+
         <Card
           title={deck.title}>
           <Text style={{textAlign:'center'}}>This deck contains {deck.questions.length} questions</Text>
@@ -65,7 +65,7 @@ export class DeckItem extends Component {
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
           title='Go to deck' />
         </Card>
-      </KeyboardAvoidingView>
+      
     )
   }
 }

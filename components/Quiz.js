@@ -12,7 +12,7 @@ export class QuizView extends Component {
 
   state = {
     currentQuestion: 0,
-    correctAnswers: 0,
+    responses: [],
     totalQuestions: 0
 
   }
@@ -25,36 +25,36 @@ export class QuizView extends Component {
   onRestart = () => {
     this.setState({
       currentQuestion: 0,
-      correctAnswers: 0,
+      responses: [],
     })
   }
 
   onCorrect = () => {
-
     this.setState({
-      correctAnswers: this.state.correctAnswers + 1,
-    })
-    this.setState({
+      responses: [...this.state.responses, 1],
       currentQuestion: this.state.currentQuestion + 1
     })
-
+    console.log(this.state)
   }
 
   onIncorrect = () => {
+
     this.setState({
+      responses: [...this.state.responses, 0],
       currentQuestion: this.state.currentQuestion + 1
     })
+    console.log(this.state)
   }
 
 
   render(){
 
     const { questions } = this.props.navigation.state.params
-    const { currentQuestion, totalQuestions, correctAnswers } = this.state
-
+    const { currentQuestion, totalQuestions, responses } = this.state
+    console.log(this.state)
     if (currentQuestion === totalQuestions){
       return <QuizResults
-        correctAnswers={correctAnswers}
+        responses={responses}
         totalQuestions={totalQuestions}
         onRestart={this.onRestart}
         navigation={this.props.navigation}
@@ -149,12 +149,12 @@ export class QuizResults extends Component {
   }
 
   render(){
-    const { correctAnswers, totalQuestions } = this.props
+    const { responses, totalQuestions } = this.props
     return(
 
       <Card title="Results">
         <Rating
-          correct={correctAnswers}
+          responses={responses}
           total={totalQuestions}
         />
         <Button
@@ -179,19 +179,25 @@ export class QuizResults extends Component {
 
 export class Rating extends Component {
   render(){
+    const { responses, total } = this.props
+    const correct = responses.reduce(function(a, b) {
+        return a + b;
+      }, 0);
+    const ratio = (correct/total) * 100
+    const percent = ratio.toFixed(2)
     return(
       <View>
-        <Text h4 style={{textAlign:'center'}}>{100*this.props.correct/this.props.total} % correct</Text>
+        <Text h4 style={{textAlign:'center'}}>{percent} % correct</Text>
         <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 12}}>
 
           {
-            range(this.props.total).map((i) => {
+            responses.map((i, index) => {
 
-              if (i < this.props.correct) {
-                return <Icon name='check-circle' color="#26A69A" size={30}/>
+              if (i == 1) {
+                return <Icon key={index} name='check-circle' color="#26A69A" size={30}/>
               }
               else{
-                return <Icon name='cancel' color="#F44336" size={30}/>
+                return <Icon key={index} name='cancel' color="#F44336" size={30}/>
               }
             }
             )
