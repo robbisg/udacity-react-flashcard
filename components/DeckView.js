@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, FlatList, TextInput } from 'react-native'
+import { View, TouchableOpacity, Text, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { removeEntry, submitEntry, decks } from '../utils/api'
 import { Button, Card } from 'react-native-elements'
@@ -83,31 +83,36 @@ export class AddQuestion extends Component {
 
   render(){
     const { deck } = this.props.navigation.state.params
+    const { question, answer } = this.state
     return (
+      <KeyboardAvoidingView keyboardVerticalOffset={100} behavior='position'>
+        <Card title={deck}>
 
-      <Card title={deck}>
-        <Text style={{marginBottom: 10}}>
-          Insert new questions.
-        </Text>
-        <FormLabel>Question</FormLabel>
-        <FormInput
-          onChangeText={(text) => this.setState({question: text})}
-          textInputRef={this.state.question}
-        />
+          <Text style={{marginBottom: 10}}>
+            Insert new questions.
+          </Text>
+          <FormLabel>Question</FormLabel>
+          <FormInput
+            onChangeText={(text) => this.setState({question: text})}
+            textInputRef={this.state.question}
+          />
 
-        <FormLabel>Answer</FormLabel>
-        <FormInput
-          onChangeText={(text) => this.setState({answer:text})}
-          textInputRef={this.state.question}
-        />
+          <FormLabel>Answer</FormLabel>
+          <FormInput
+            onChangeText={(text) => this.setState({answer:text})}
+            textInputRef={this.state.question}
+          />
 
-        <Button
-          iconRight={{name: 'add'}}
-          backgroundColor='#FFC107'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
-          onPress={this.addQuestion}
-        title='Add Question' />
-      </Card>
+          <Button
+            iconRight={{name: 'add'}}
+            backgroundColor='#FFC107'
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
+            disabled={(question === "" ) || (answer === "") ? true : false }
+            onPress={this.addQuestion}
+          title='Add Question' />
+
+        </Card>
+      </KeyboardAvoidingView>
 
     )
   }

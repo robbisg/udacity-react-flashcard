@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, FlatList, TextInput } from 'react-native'
+import { View, TouchableOpacity, Text, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 import { getDecks, saveDeckTitle } from '../utils/api'
@@ -54,17 +54,18 @@ export class DeckItem extends Component {
   render(){
     const { deck } = this.props
     return (
-
-      <Card
-        title={deck.title}>
-        <Text style={{textAlign:'center'}}>This deck contains {deck.questions.length} questions</Text>
-        <Button
-          iconRight={{name: 'arrow-forward'}}
-          backgroundColor='#03A9F4'
-          onPress={() => this.props.navigation.navigate('Deck', {deck: deck.title})}
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
-        title='Go to deck' />
-      </Card>
+      <KeyboardAvoidingView style={{flex: 2}} keyboardVerticalOffset={365} behavior='height'>
+        <Card
+          title={deck.title}>
+          <Text style={{textAlign:'center'}}>This deck contains {deck.questions.length} questions</Text>
+          <Button
+            iconRight={{name: 'arrow-forward'}}
+            backgroundColor='#03A9F4'
+            onPress={() => this.props.navigation.navigate('Deck', {deck: deck.title})}
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
+          title='Go to deck' />
+        </Card>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -99,7 +100,7 @@ export class DeckList extends Component {
         <FlatList
           data={Object.keys(this.state.decks)}
           renderItem={({item}) => <DeckItem key={item} deck={this.state.decks[item]} navigation={this.props.navigation}/>}
-          keyExtractor={(item, index) => index} 
+          keyExtractor={(item, index) => index}
         />
 
       </View>
