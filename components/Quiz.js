@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, FlatList, TextInput } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 import { removeEntry, submitEntry, decks } from '../utils/api'
 import { StackNavigator } from 'react-navigation'
 import { Icon, Slider, Text, Divider } from 'react-native-elements';

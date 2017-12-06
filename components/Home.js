@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import { Ionicons } from '@expo/vector-icons'
 import { getDecks, saveDeckTitle } from '../utils/api'
 import { DeckView, AddQuestion } from './DeckView'
 import { QuizView, QuizResults } from './Quiz'

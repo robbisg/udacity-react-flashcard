@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 import { removeEntry, submitEntry, decks } from '../utils/api'
 import { Button, Card } from 'react-native-elements'
 import { FormLabel, FormInput } from 'react-native-elements'
@@ -23,7 +22,6 @@ export class DeckView extends Component {
 
   }
   componentWillReceiveProps(){
-    console.log("Props")
     this.updateDecks()
   }
 
