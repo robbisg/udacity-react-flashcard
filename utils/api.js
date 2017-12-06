@@ -28,9 +28,11 @@ export const decks = {
                 }
               }
 
+export function clear(){
+  AsyncStorage.clear()
+}
 
 export function initDecks( data ){
-  console.log(data)
   AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify({}))
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY,
                                 JSON.stringify({...data}))

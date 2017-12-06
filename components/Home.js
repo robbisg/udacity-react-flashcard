@@ -46,7 +46,7 @@ export class DeckItem extends Component {
 
   static defaultProps = {
         deck: {
-          title: "Undefined",
+          title: "",
           questions: []
         }
       }
@@ -65,7 +65,7 @@ export class DeckItem extends Component {
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
           title='Go to deck' />
         </Card>
-      
+
     )
   }
 }

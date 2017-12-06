@@ -34,7 +34,6 @@ export class QuizView extends Component {
       responses: [...this.state.responses, 1],
       currentQuestion: this.state.currentQuestion + 1
     })
-    console.log(this.state)
   }
 
   onIncorrect = () => {
@@ -43,7 +42,6 @@ export class QuizView extends Component {
       responses: [...this.state.responses, 0],
       currentQuestion: this.state.currentQuestion + 1
     })
-    console.log(this.state)
   }
 
 
@@ -51,14 +49,14 @@ export class QuizView extends Component {
 
     const { questions } = this.props.navigation.state.params
     const { currentQuestion, totalQuestions, responses } = this.state
-    console.log(this.state)
+
     if (currentQuestion === totalQuestions){
       return <QuizResults
         responses={responses}
         totalQuestions={totalQuestions}
         onRestart={this.onRestart}
         navigation={this.props.navigation}
-      />
+             />
 
     }
     else {
