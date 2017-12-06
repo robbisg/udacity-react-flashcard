@@ -3,7 +3,7 @@ import { View, TouchableOpacity, FlatList, TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { removeEntry, submitEntry, decks } from '../utils/api'
 import { StackNavigator } from 'react-navigation'
-import { Icon, Slider, Text } from 'react-native-elements';
+import { Icon, Slider, Text, Divider } from 'react-native-elements';
 import { Button, Card } from 'react-native-elements'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 import range from 'lodash/range';
@@ -103,21 +103,21 @@ export class QuizItem extends Component {
 
         <Card title="Question">
           <View >
-            <Text style={{marginBottom: 10, textAlign:'center'}}>
+            <Text h4 style={{marginBottom: 10, textAlign:'center'}}>
               {question.question}
             </Text>
             { this.state.showAnswer ?
               <View style={{alignItems:'center'}}>
-                <Text>{question.answer}</Text>
+                <Text style={{fontSize: 20, textAlign:'center', marginBottom: 10}}>{question.answer}</Text>
                 <TouchableOpacity onPress={this.onShowAnswer}>
-                  <Text> Hide </Text>
+                  <Text style={{color:'#000000', fontWeight:'bold'}}> Hide </Text>
                 </TouchableOpacity>
               </View>
 
             :
             <View style={{alignItems:'center'}}>
               <TouchableOpacity onPress={this.onShowAnswer}>
-                <Text> Show Answer </Text>
+                <Text style={{color:'#EF5350'}}> Show Answer </Text>
               </TouchableOpacity>
             </View>
             }

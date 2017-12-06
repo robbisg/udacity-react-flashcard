@@ -38,7 +38,7 @@ export class DeckView extends Component {
     return(
 
       <Card title={deck.title}>
-        <Text style={{marginBottom: 10}}>
+        <Text style={{marginTop: 10, marginBottom:15, textAlign:'center'}}>
           This is the {deck.title} deck, that contains {deck.questions.length} questions.
         </Text>
 
