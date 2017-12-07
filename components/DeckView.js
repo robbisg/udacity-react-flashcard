@@ -42,13 +42,13 @@ export class DeckView extends Component {
 
         <Button
           disabled={ deck.questions.length === 0 ? true : false}
-          iconRight={{name: 'question-answer'}}
+          //iconRight={{name: 'question-answer'}}
           backgroundColor='#009688'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
           onPress={() => this.props.navigation.navigate("QuizView", {questions: deck.questions})}
         title='Start Quiz' />
         <Button
-          iconRight={{name: 'add'}}
+          //iconRight={{name: 'add'}}
           backgroundColor='#FFC107'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
           onPress={() => this.props.navigation.navigate("Questions", {deck: deck.title})}
@@ -102,7 +102,7 @@ export class AddQuestion extends Component {
           />
 
           <Button
-            iconRight={{name: 'add'}}
+            //iconRight={{name: 'add'}}
             backgroundColor='#FFC107'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
             disabled={(question === "" ) || (answer === "") ? true : false }

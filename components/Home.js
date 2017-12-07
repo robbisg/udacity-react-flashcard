@@ -28,7 +28,7 @@ export class AddDeck extends Component {
           textInputRef={this.state.title}
         />
         <Button
-          iconRight={{name: 'add'}}
+          //iconRight={{name: 'add'}}
           backgroundColor='#FFC107'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
           onPress={this.onAddDeck}
@@ -58,7 +58,7 @@ export class DeckItem extends Component {
           title={deck.title}>
           <Text style={{textAlign:'center'}}>This deck contains {deck.questions.length} questions</Text>
           <Button
-            iconRight={{name: 'arrow-forward'}}
+            //iconRight={{name: 'arrow-forward'}}
             backgroundColor='#03A9F4'
             onPress={() => this.props.navigation.navigate('Deck', {deck: deck.title})}
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}

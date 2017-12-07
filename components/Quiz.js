@@ -120,13 +120,13 @@ export class QuizItem extends Component {
             }
           </View>
           <Button
-            iconRight={{name: 'check'}}
+            //iconRight={{name: 'check'}}
             backgroundColor='#009688'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10, marginBottom: 10}}
             onPress={this.props.onCorrect}
           title='Correct' />
           <Button
-            iconRight={{name: 'clear'}}
+            //iconRight={{name: 'clear'}}
             backgroundColor='#EF5350'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
             onPress={this.props.onIncorrect}
@@ -155,13 +155,13 @@ export class QuizResults extends Component {
           total={totalQuestions}
         />
         <Button
-          icon={{name: 'autorenew'}}
+          //icon={{name: 'autorenew'}}
           backgroundColor='#009688'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 15}}
           onPress={this.props.onRestart}
         title='Restart' />
         <Button
-          icon={{name: 'home'}}
+          //icon={{name: 'home'}}
           backgroundColor='#009688'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 15}}
           onPress={() => this.props.navigation.navigate("Home")}
@@ -185,21 +185,23 @@ export class Rating extends Component {
     return(
       <View>
         <Text h4 style={{textAlign:'center'}}>{percent} % correct</Text>
-        <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 12}}>
+        {/**
+          <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 12}}>
 
           {
             responses.map((i, index) => {
 
-              if (i == 1) {
-                return <Icon key={index} name='check-circle' color="#26A69A" size={30}/>
-              }
-              else{
-                return <Icon key={index} name='cancel' color="#F44336" size={30}/>
-              }
+          if (i == 1) {
+          return <Text h4 style={{textAlign:'center'}}>V</Text>
+          //<Icon key={index} name='check-circle' color="#26A69A" size={30}/>
+          }
+          else{
+          return <Icon key={index} name='cancel' color="#F44336" size={30}/>
+          }
             }
             )
           }
-        </View>
+        </View>*/}
       </View>
     )
   }
