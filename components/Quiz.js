@@ -185,21 +185,23 @@ export class Rating extends Component {
     return(
       <View>
         <Text h4 style={{textAlign:'center'}}>{percent} % correct</Text>
-        <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 12}}>
+        {/**
+          <View style={{flexDirection: 'row', justifyContent:'center', marginTop: 12}}>
 
           {/*
             responses.map((i, index) => {
 
-              if (i == 1) {
+          if (i == 1) {
             return <Icon key={index} name='check-circle' color="#26A69A" size={30}/>
-              }
-              else{
+          //<Icon key={index} name='check-circle' color="#26A69A" size={30}/>
+          }
+          else{
             return <Icon key={index} name='cancel' color="#F44336" size={30}/>
-              }
+          }
             *}
             )
           */}
-        </View>
+        </View>*/}
       </View>
     )
   }
