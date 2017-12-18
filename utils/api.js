@@ -33,22 +33,31 @@ export function clear(){
 }
 
 export function initDecks( data ){
-  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify({}))
-  return AsyncStorage.mergeItem(DECK_STORAGE_KEY,
-                                JSON.stringify({...data}))
+  AsyncStorage.getItem(DECK_STORAGE_KEY)
+  .then((res) => {
+    if (res === null){
+      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify({...data}))
+    }
+
+  })
+  .catch((error) => {console.log(error)}
+  )
+
+
 }
 
 export function getDecks() {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
 }
 
-export async function getDeck({key}) {
 
+export async function getDeck({key}) {
 
   try {
     const results = await AsyncStorage.getItem(DECK_STORAGE_KEY);
     if (results !== null){
-      return JSON.parse(results)[key]
+      const data = JSON.parse(results)
+      return data[key]
     }
   }
   catch (error) {
@@ -73,7 +82,7 @@ export function addCardtoDeck ({ card, key }){
     .then((results) => {
       const data = JSON.parse(results)
       data[key].questions.push(card)
-      AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(data))
+      return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(data))
 
     })
 }

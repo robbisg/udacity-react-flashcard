@@ -4,6 +4,7 @@ import { removeEntry, submitEntry, decks } from '../utils/api'
 import { Button, Card } from 'react-native-elements'
 import { FormLabel, FormInput } from 'react-native-elements'
 import { addCardtoDeck, getDeck } from '../utils/api'
+import { NavigationActions } from 'react-navigation'
 
 export class DeckView extends Component {
 
@@ -15,18 +16,20 @@ export class DeckView extends Component {
   }
 
 
-  updateDecks = () => {
-    const nn = getDeck({key: this.props.navigation.state.params.deck}).then((r) => {
+  updateDeck = () => {
+    const deckKey = this.props.navigation.state.params.deck
+    const nn = getDeck({key: deckKey }).then((r) => {
+      console.log(r)
       this.setState({deck: r})
     })
 
   }
   componentWillReceiveProps(){
-    this.updateDecks()
+    this.updateDeck()
   }
 
   componentDidMount(){
-    this.updateDecks()
+    this.updateDeck()
   }
 
   render(){
@@ -42,13 +45,13 @@ export class DeckView extends Component {
 
         <Button
           disabled={ deck.questions.length === 0 ? true : false}
-          iconRight={{name: 'question-answer'}}
+          //iconRight={{name: 'question-answer'}}
           backgroundColor='#009688'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
           onPress={() => this.props.navigation.navigate("QuizView", {questions: deck.questions})}
         title='Start Quiz' />
         <Button
-          iconRight={{name: 'add'}}
+          //iconRight={{name: 'add'}}
           backgroundColor='#FFC107'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
           onPress={() => this.props.navigation.navigate("Questions", {deck: deck.title})}
@@ -73,9 +76,21 @@ export class AddQuestion extends Component {
      key: deck,
      card: this.state
    }
-   console.log(data)
-   addCardtoDeck(data)
-   this.props.navigation.navigate('Deck', {deck: deck})
+
+   addCardtoDeck(data).then((d) => {
+
+   const navigateAction = NavigationActions.reset({
+       index: 1,
+       actions: [
+         NavigationActions.navigate({ routeName: 'Home'}),
+         NavigationActions.navigate({ routeName: 'Deck',
+            params: {deck: deck}
+       })
+       ]
+   })
+
+   this.props.navigation.dispatch(navigateAction)
+ })
  }
 
 
@@ -97,12 +112,12 @@ export class AddQuestion extends Component {
 
           <FormLabel>Answer</FormLabel>
           <FormInput
-            onChangeText={(text) => this.setState({answer:text})}
+            onChangeText={(text) => this.setState({answer: text})}
             textInputRef={this.state.question}
           />
 
           <Button
-            iconRight={{name: 'add'}}
+            //iconRight={{name: 'add'}}
             backgroundColor='#FFC107'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
             disabled={(question === "" ) || (answer === "") ? true : false }

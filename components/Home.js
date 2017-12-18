@@ -6,6 +6,10 @@ import { DeckView, AddQuestion } from './DeckView'
 import { QuizView, QuizResults } from './Quiz'
 import { FormLabel, FormInput } from 'react-native-elements'
 import { Button, Card } from 'react-native-elements'
+import { NavigationActions } from 'react-navigation'
+
+
+
 
 export class AddDeck extends Component {
 
@@ -15,7 +19,15 @@ export class AddDeck extends Component {
 
   onAddDeck = () => {
     saveDeckTitle({title: this.state.title})
-    this.props.navigation.navigate("DeckList")
+    //this.props.navigation.navigate("DeckList")
+    const navigateAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'Home'})
+        ]
+    })
+
+    this.props.navigation.dispatch(navigateAction)
   }
 
   render(){
@@ -28,7 +40,7 @@ export class AddDeck extends Component {
           textInputRef={this.state.title}
         />
         <Button
-          iconRight={{name: 'add'}}
+          //iconRight={{name: 'add'}}
           backgroundColor='#FFC107'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
           onPress={this.onAddDeck}
@@ -58,7 +70,7 @@ export class DeckItem extends Component {
           title={deck.title}>
           <Text style={{textAlign:'center'}}>This deck contains {deck.questions.length} questions</Text>
           <Button
-            iconRight={{name: 'arrow-forward'}}
+            //iconRight={{name: 'arrow-forward'}}
             backgroundColor='#03A9F4'
             onPress={() => this.props.navigation.navigate('Deck', {deck: deck.title})}
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
@@ -84,11 +96,13 @@ export class DeckList extends Component {
   }
 
   componentWillReceiveProps() {
+    console.log("ReceiveProps")
     this.updateDecks()
   }
 
 
   componentDidMount() {
+    console.log("DidMount")
     this.updateDecks()
   }
 

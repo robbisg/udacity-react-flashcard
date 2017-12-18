@@ -21,6 +21,7 @@ const Tabs = TabNavigator({
 
 export default class App extends React.Component {
 
+
   componentDidMount() {
     //clear()
     initDecks(decks)
