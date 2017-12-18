@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
+import { View, TouchableOpacity, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
 import { StackNavigator } from 'react-navigation'
-import { getDecks, saveDeckTitle } from '../utils/api'
+import { getDecks, saveDeckTitle, initDecks, decks } from '../utils/api'
 import { DeckView, AddQuestion } from './DeckView'
 import { QuizView, QuizResults } from './Quiz'
 import { FormLabel, FormInput } from 'react-native-elements'
-import { Button, Card } from 'react-native-elements'
+import { Button, Card, Text } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
 
 
@@ -88,6 +88,11 @@ export class DeckList extends Component {
     decks: {}
   }
 
+  importDecks = () => {
+    initDecks(decks).then(() => {
+      this.updateDecks()
+    })
+  }
 
   updateDecks = () => {
     getDecks().then((data) => {
@@ -108,6 +113,28 @@ export class DeckList extends Component {
 
 
   render(){
+    console.log(this.state.decks)
+    if (this.state.decks === null){
+      return (
+        <View>
+          <Text h4 style={{textAlign:'center', margin: 30}}>Decks not present in the database!</Text>
+          <Button
+            //iconRight={{name: 'arrow-forward'}}
+            backgroundColor='#03A9F4'
+            onPress={() => this.props.navigation.navigate('Add')}
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
+          title='Add Deck!' />
+          <Button
+            //iconRight={{name: 'arrow-forward'}}
+            backgroundColor='#03A9F4'
+            onPress={this.importDecks}
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0, marginTop: 10}}
+          title='Import custom decks' />
+        </View>
+      )
+    }
+
+
     return (
       <View>
         <FlatList

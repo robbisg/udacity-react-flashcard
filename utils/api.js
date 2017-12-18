@@ -33,10 +33,10 @@ export function clear(){
 }
 
 export function initDecks( data ){
-  AsyncStorage.getItem(DECK_STORAGE_KEY)
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
   .then((res) => {
     if (res === null){
-      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify({...data}))
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify({...data}))
     }
 
   })
