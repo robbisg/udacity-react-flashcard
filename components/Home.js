@@ -19,16 +19,18 @@ export class AddDeck extends Component {
 
   onAddDeck = () => {
     saveDeckTitle({title: this.state.title})
-    //this.props.navigation.navigate("DeckList")
+      .then(() => {
     const navigateAction = NavigationActions.reset({
-        index: 0,
+        index: 1,
         actions: [
-          NavigationActions.navigate({ routeName: 'Home'})
+          NavigationActions.navigate({ routeName: 'Home'}),
+          NavigationActions.navigate({ routeName: 'Deck', params:{deck: this.state.title}})
         ]
     })
 
     this.props.navigation.dispatch(navigateAction)
-  }
+  })
+}
 
   render(){
     return(
@@ -101,19 +103,19 @@ export class DeckList extends Component {
   }
 
   componentWillReceiveProps() {
-    console.log("ReceiveProps")
+    //console.log("ReceiveProps")
     this.updateDecks()
   }
 
 
   componentDidMount() {
-    console.log("DidMount")
+    //console.log("DidMount")
     this.updateDecks()
   }
 
 
   render(){
-    console.log(this.state.decks)
+    //console.log(this.state.decks)
     if (this.state.decks === null){
       return (
         <View>
